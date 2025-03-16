@@ -1,7 +1,9 @@
 vim.g.mapleader = " "
 
 -- 🏗 File Explorer
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open Netrw file explorer" })
+vim.keymap.set("n", "<leader>pv", function()
+    require("nvim-tree.api").tree.toggle()
+end, { desc = "Open file explorer", noremap=true,silent=true })
 
 -- 📑 Navigation Enhancements
 vim.keymap.set("n", "J", "mzJ`z", { desc = "Join lines but keep cursor in place" })
@@ -9,8 +11,6 @@ vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Move down half-page and center
 vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Move up half-page and center" })
 vim.keymap.set("n", "n", "nzzzv", { desc = "Keep search results centered" })
 vim.keymap.set("n", "N", "Nzzzv", { desc = "Keep previous search results centered" })
-vim.keymap.set("n", "<C-k>", "<cmd>cnext<CR>zz", { desc = "Next quickfix item" })
-vim.keymap.set("n", "<C-j>", "<cmd>cprev<CR>zz", { desc = "Previous quickfix item" })
 vim.keymap.set("n", "<leader>k", "<cmd>lnext<CR>zz", { desc = "Next location list item" })
 vim.keymap.set("n", "<leader>j", "<cmd>lprev<CR>zz", { desc = "Previous location list item" })
 
@@ -29,7 +29,6 @@ vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Use <C-c> as <Esc>" })
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Ex mode" })
 
 -- 🎯 LSP Actions
-vim.keymap.set("n", "<leader>f", vim.lsp.buf.format, { desc = "Format code with LSP" })
 vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
 -- 🔍 Quick Search & Replace

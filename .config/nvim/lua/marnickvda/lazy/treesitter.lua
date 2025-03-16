@@ -2,7 +2,6 @@ return {
     "nvim-treesitter/nvim-treesitter",
     event = { "BufReadPre", "BufNewFile" },
     build = ":TSUpdate",
-    dependencies = { "nvim-treesitter/nvim-treesitter-textobjects", "windwp/nvim-ts-autotag", },
     config = function()
         local treesitter = require("nvim-treesitter.configs")
 
@@ -10,7 +9,7 @@ return {
             ensure_installed = {
                 "vimdoc", "javascript", "typescript", "c", "lua", "rust",
                 "jsdoc", "bash", "go", "gomod", "gowork", "gosum", "tsx",
-                "html", "css", "json"
+                "html", "css", "json", "yaml",
             },
 
             sync_install = false,
