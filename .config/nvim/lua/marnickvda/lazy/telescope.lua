@@ -46,5 +46,7 @@ return {
             builtin.grep_string({ search = vim.fn.input("Grep > ") })
         end, { desc = "Telescope: Grep > [Input]" })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc="Telescope: Help Tags"})
+
+        require('telescope').load_extension("noice")
     end
 }
