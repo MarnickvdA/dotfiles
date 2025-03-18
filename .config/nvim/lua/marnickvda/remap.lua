@@ -38,7 +38,7 @@ vim.keymap.set("n", "<leader>zig", "<cmd>LspRestart<cr>", { desc = "Restart LSP"
 vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]], { desc = "Replace word under cursor" })
 
 -- 🛠 Make Current File Executable
-vim.keymap.set("n", "<leader>x", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
+vim.keymap.set("n", "<leader>Ex", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })
 
 -- 🔄 Source Neovim Config
 vim.keymap.set("n", "<leader><leader>", function()

@@ -3,6 +3,7 @@ return {
     tag = "0.1.8",
     dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
+
         require('telescope').setup({
             defaults = {
                 file_ignore_patterns = {
@@ -39,13 +40,14 @@ return {
         })
 
         local builtin = require('telescope.builtin')
+
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Telescope: Find All Files" })
         vim.keymap.set('n', '<leader>fp', builtin.git_files, { desc = "Telescope: Find Git Project Files" })
         vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Telescope: Buffers" })
         vim.keymap.set('n', '<leader>fs', function()
             builtin.grep_string({ search = vim.fn.input("Grep > ") })
         end, { desc = "Telescope: Grep > [Input]" })
-        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc="Telescope: Help Tags"})
+        vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Telescope: Help Tags" })
 
         require('telescope').load_extension("noice")
     end
