@@ -2,16 +2,37 @@
 
 set -e
 
-# Get the absolute path to the directory this script is in
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-
-# Build Brewfile from components located relative to the script
 TEMP_BREWFILE="${SCRIPT_DIR}/Brewfile.temp"
 
-# Start with base
+# 🚨 Trap to always clean up temp file
+cleanup() {
+  if [[ -f "$TEMP_BREWFILE" ]]; then
+    echo "🧹 Cleaning up temporary Brewfile..."
+    rm -f "$TEMP_BREWFILE"
+  fi
+}
+trap cleanup EXIT
+
+show_help() {
+  echo ""
+  echo "Homebrew Installer Options:"
+  echo "  --entertainment   Include entertainment apps like Spotify and WhatsApp"
+  echo "  --office365       Include Microsoft Office and Auto-Update"
+  echo "  --extra           Include optional or experimental tools"
+  echo "  --help            Show this help message and exit"
+  echo ""
+}
+
+if [[ "$*" == *"--help"* ]]; then
+  show_help
+  exit 0
+fi
+
+# Always install base 
 cp "${SCRIPT_DIR}/Brewfile.base" "$TEMP_BREWFILE"
 
-# Handle flags
+# Handle optional flags
 for arg in "$@"; do
   case "$arg" in
     --entertainment)
@@ -23,9 +44,11 @@ for arg in "$@"; do
     --extra)
       cat "${SCRIPT_DIR}/Brewfile.extra" >> "$TEMP_BREWFILE"
       ;;
+    --help)
+      ;;
     *)
       echo "❌ Unknown option: $arg"
-      echo "Usage: ./brew-install.sh [--entertainment] [--office365] [--extra]"
+      echo "Run with --help for usage."
       exit 1
       ;;
   esac
@@ -35,4 +58,4 @@ echo "📦 Installing Homebrew packages..."
 brew bundle --file="$TEMP_BREWFILE"
 
 echo "✅ Done!"
-rm "$TEMP_BREWFILE"
+
