@@ -81,7 +81,6 @@ export VISUAL="$EDITOR"
 
 export HOMEBREW_NO_ENV_HINTS=true
 
-export PATH=$PATH:$HOME/go/bin
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
