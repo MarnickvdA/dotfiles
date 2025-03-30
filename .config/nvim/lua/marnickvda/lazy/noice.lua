@@ -4,6 +4,9 @@ return {
     opts = {
         cmdline = {
             enabled = true,
+        },
+        notify = {
+            enabled = false,
         }
     },
     dependencies = {

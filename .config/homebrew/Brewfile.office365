@@ -1,0 +1,3 @@
+# Microsoft Office
+cask "microsoft-auto-update"
+cask "microsoft-office"
