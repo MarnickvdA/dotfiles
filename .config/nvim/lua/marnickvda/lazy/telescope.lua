@@ -6,7 +6,7 @@ return {
         require('telescope').setup({
             defaults = {
                 file_ignore_patterns = {
-                    "node_modules", ".git", "dist", "build", "vendor",
+                    "node_modules", ".next", ".git", "dist", "build", "vendor",
                     "%.lock", "%-lock%.json", "yarn%.lock", "pnpm%-lock%.yaml",
                     "go%.sum", "Cargo%.lock", "composer%.lock",
                     "%.min.js", "%.png", "%.jpg", "%.jpeg"
@@ -16,15 +16,20 @@ return {
                     "--exclude", ".git", "--exclude", "node_modules",
                     "--exclude", "*.lock", "--exclude", "package-lock.json",
                     "--exclude", "yarn.lock", "--exclude", "pnpm-lock.yaml",
-                    "--exclude", "go.sum", "--exclude", "Cargo.lock", "--exclude", "composer.lock"
+                    "--exclude", "go.sum", "--exclude", "Cargo.lock",
+                    "--exclude", "composer.lock", "--exclude", ".next",
                 },
             },
             pickers = {
+                find_files = {
+                    hidden = true,
+                },
                 live_grep = {
                     additional_args = function()
                         return {
                             "--glob", "!node_modules/*",
                             "--glob", "!dist/*",
+                            "--glob", "!.next/*",
                             "--glob", "!vendor/*",
                             "--glob", "!package-lock.json",
                             "--glob", "!yarn.lock",
@@ -42,10 +47,8 @@ return {
 
         vim.keymap.set('n', '<leader>ff', builtin.find_files, { desc = "Telescope: Find All Files" })
         vim.keymap.set('n', '<leader>fp', builtin.git_files, { desc = "Telescope: Find Git Project Files" })
+        vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = "Telescope: Quickfix list" })
         vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Telescope: Buffers" })
-        vim.keymap.set('n', '<leader>fs', function()
-            builtin.grep_string({ search = vim.fn.input("Grep > ") })
-        end, { desc = "Telescope: Grep > [Input]" })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Telescope: Help Tags" })
 
         require('telescope').load_extension("noice")

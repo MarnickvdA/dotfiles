@@ -6,20 +6,22 @@ return {
         "nvim-tree/nvim-web-devicons",
     },
     config = function()
+        local window_size = 0.7
+
         require("nvim-tree").setup({
             disable_netrw = true,
             hijack_netrw = true,
             view = {
                 float = {
-                    enable = true, -- Enable floating mode
+                    enable = true,             -- Enable floating mode
                     quit_on_focus_loss = true, -- Auto-close when focus is lost
                     open_win_config = {
                         relative = "editor",
-                        border = "rounded",      -- Use "single", "double", "shadow", or "rounded"
-                        width = math.floor(vim.o.columns * 0.6), -- 60% of the editor width
-                        height = math.floor(vim.o.lines * 0.6), -- 60% of the editor height
-                        row = math.floor(vim.o.lines * 0.2), -- Center it vertically
-                        col = math.floor(vim.o.columns * 0.2), -- Center it horizontally
+                        border = "rounded",
+                        width = math.floor(vim.o.columns * window_size),
+                        height = math.floor(vim.o.lines * window_size),
+                        row = math.floor(vim.o.lines * ((1 - window_size) / 2)),  -- Center it vertically
+                        col = math.floor(vim.o.columns * ((1 - window_size) / 2)), -- Center it horizontally
                     },
                 },
                 width = 30, -- Not relevant for floating mode but required
@@ -31,6 +33,10 @@ return {
             hijack_cursor = true,
             diagnostics = { enable = true },
             git = { enable = true },
+            filters = {
+                git_ignored = false,
+                custom = { ".DS_Store" }
+            },
             actions = {
                 open_file = {
                     quit_on_open = true, -- Close tree when opening a file
