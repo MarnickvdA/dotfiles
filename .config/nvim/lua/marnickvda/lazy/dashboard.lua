@@ -92,7 +92,15 @@ return {
         local alpha = require("alpha")
         local dashboard = require("alpha.themes.dashboard")
 
-        dashboard.section.header.val = fat_cat
+        header_art = {
+            eagle,
+            campfire,
+            neovim,
+            woah,
+            fat_cat,
+        }
+
+        dashboard.section.header.val = header_art[math.random(#header_art)] 
 
         dashboard.section.buttons.val = {
             dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
