@@ -1,6 +1,7 @@
 brew "bat"
 brew "git"
 brew "gitleaks"
+brew "delta"
 brew "htop"
 brew "dug"
 brew "caddy"

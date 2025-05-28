@@ -1,3 +1,48 @@
+[core]
+    editor = nvim
+
+[gpg]
+  format = ssh
+
+[gpg "ssh"]
+  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
+
+[commit]
+  gpgsign = true
+
 [user]
-	email = marnick.van.der.arend@ingka.ikea.com
-	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRiP7E68xoGdxXNrbqnhxAUq8WFzrTzWK01QUUm9gd4
+	name = Marnick van der Arend
+    
+[github]
+    user = marnickvda
+
+[push]
+	autoSetupRemote = true
+
+[color]
+	ui = auto
+
+[init]
+	defaultBranch = main
+
+[status]
+	submoduleSummary = true
+
+[pull]
+	rebase = true
+
+[rerere]
+	enabled = true
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    dark = true      # or light = true, or omit for auto-detection
+
+[merge]
+    conflictstyle = zdiff3
