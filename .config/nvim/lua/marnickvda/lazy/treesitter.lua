@@ -31,7 +31,9 @@ return {
                 "gitignore",
                 "dockerfile",
                 "vim",
-                "markdown"
+                "markdown",
+                "rust",
+                "ron"
             },
 
             sync_install = false,
@@ -108,7 +110,7 @@ return {
                 },
                 move = {
                     enable = true,
-                    set_jumps = true, 
+                    set_jumps = true,
                     goto_next_start = {
                         ["]m"] = "@function.outer",
                         ["]]"] = "@class.outer",
