@@ -1,37 +1,3 @@
-[core]
-    editor = nvim
-
-[gpg]
-  format = ssh
-
-[gpg "ssh"]
-  program = "/Applications/1Password.app/Contents/MacOS/op-ssh-sign"
-
-[commit]
-  gpgsign = true
-
 [user]
-    signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIJbiNxqVL7mCwNF/haSD2MGI0ztglsXAJCNPatZmlgnE
-	name = Marnick van der Arend
-	email = marnick@vdarend.com
-    
-[github]
-    user = marnickvda
-
-[push]
-	autoSetupRemote = true
-
-[color]
-	ui = auto
-
-[init]
-	defaultBranch = main
-
-[status]
-	submoduleSummary = true
-
-[pull]
-	rebase = true
-
-[rerere]
-	enabled = true
+	email = marnick.van.der.arend@ingka.ikea.com
+	signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIBRiP7E68xoGdxXNrbqnhxAUq8WFzrTzWK01QUUm9gd4

@@ -11,35 +11,11 @@ return {
                     "go%.sum", "Cargo%.lock", "composer%.lock",
                     "%.min.js", "%.png", "%.jpg", "%.jpeg"
                 },
-                vimgrep_arguments = {
-                    "fd", "--type", "f", "--hidden",
-                    "--exclude", ".git", "--exclude", "node_modules",
-                    "--exclude", "*.lock", "--exclude", "package-lock.json",
-                    "--exclude", "yarn.lock", "--exclude", "pnpm-lock.yaml",
-                    "--exclude", "go.sum", "--exclude", "Cargo.lock",
-                    "--exclude", "composer.lock", "--exclude", ".next",
-                },
             },
             pickers = {
                 find_files = {
                     hidden = true,
                 },
-                live_grep = {
-                    additional_args = function()
-                        return {
-                            "--glob", "!node_modules/*",
-                            "--glob", "!dist/*",
-                            "--glob", "!.next/*",
-                            "--glob", "!vendor/*",
-                            "--glob", "!package-lock.json",
-                            "--glob", "!yarn.lock",
-                            "--glob", "!pnpm-lock.yaml",
-                            "--glob", "!go.sum",
-                            "--glob", "!Cargo.lock",
-                            "--glob", "!composer.lock"
-                        }
-                    end
-                }
             }
         })
 
@@ -50,6 +26,7 @@ return {
         vim.keymap.set('n', '<leader>fq', builtin.quickfix, { desc = "Telescope: Quickfix list" })
         vim.keymap.set('n', '<leader>fb', builtin.buffers, { desc = "Telescope: Buffers" })
         vim.keymap.set('n', '<leader>fh', builtin.help_tags, { desc = "Telescope: Help Tags" })
+        vim.keymap.set('n', '<leader>fg', builtin.live_grep, { desc = "Telescope: Find in Files" })
 
         require('telescope').load_extension("noice")
         require("telescope").load_extension("ui-select")

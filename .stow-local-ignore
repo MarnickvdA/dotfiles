@@ -23,5 +23,7 @@ _darcs
 ^/COPYING
 
 install.sh
+\.gitconfig
 
-assets/
+scripts/*
+assets/*

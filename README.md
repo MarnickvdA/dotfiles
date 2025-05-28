@@ -8,3 +8,7 @@ Run `./install.sh --help` to see all options
 1. Manually install Go `https://go.dev/dl/`
 1. Import iTerm2 profile from `.config/iterm2/iterm2-profile.json` into iTerm2. 
 
+## Updating .gitconfig
+
+1. Make changes in `./.gitconfig`
+1. Run `./scripts/configure-git.sh` to synchronize changes with correct credentials

@@ -16,9 +16,19 @@ return {
 
     config = function()
         require("conform").setup({
+            formatters = {
+                odinfmt = {
+                    command = "odinfmt",
+                    args = { "-stdin" },
+                    stdin = true,
+                },
+            },
             formatters_by_ft = {
+                odin = { "odinfmt" }
             }
         })
+
+
 
         vim.api.nvim_create_autocmd('LspAttach', {
             desc = 'LSP actions',
@@ -65,6 +75,7 @@ return {
                 "tailwindcss",
                 "marksman",
                 "taplo",
+                "ols",
             },
             handlers = {
                 function(server_name) -- default handler (optional)
