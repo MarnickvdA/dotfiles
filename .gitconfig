@@ -1,5 +1,6 @@
 [core]
     editor = nvim
+    pager = delta
 
 [gpg]
   format = ssh
@@ -34,15 +35,16 @@
 [rerere]
 	enabled = true
 
-[core]
-    pager = delta
-
 [interactive]
     diffFilter = delta --color-only
 
+;https://github.com/dandavison/delta
+;navigate: use n and N to move between diff sections
 [delta]
-    navigate = true  # use n and N to move between diff sections
-    dark = true      # or light = true, or omit for auto-detection
+    side-by-side = true
+    line-number = true
+    navigate = true
+    dark = true
 
 [merge]
     conflictstyle = zdiff3
