@@ -21,6 +21,7 @@ return {
                 lua = { "stylua" },
                 python = { "isort", "black" },
                 go = { "gofmt" },
+                sql = { "sqlfmt" },
             },
             format_on_save = {
                 lsp_fallback = true,
