@@ -8,6 +8,7 @@ alias weather="curl http://wttr.in/"
 alias vim=nvim
 alias pip=pip3
 alias k=kubectl
+alias python=python3
 alias g=git
 alias docker=podman
 alias docker-compose="podman compose"

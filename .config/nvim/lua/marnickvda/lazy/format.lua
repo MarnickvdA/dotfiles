@@ -6,6 +6,7 @@ return {
 
         conform.setup({
             formatters_by_ft = {
+                zsh = { "shfmt" },
                 bash = { "shfmt" },
                 sh = { "shfmt" },
                 javascript = { "prettier" },
