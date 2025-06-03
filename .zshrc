@@ -46,27 +46,28 @@ zplug load
 if ! zplug check --verbose; then
     printf "Install? [y/N]: "
     if read -q; then
-        echo; zplug install
+        echo
+        zplug install
     fi
 fi
 
-
 # User configuration
-
+ 
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":$HOME/completions:"* ]]; then export FPATH="$HOME/completions:$FPATH"; fi
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='vim'
+    export EDITOR='vim'
 else
-  export EDITOR='nvim'
+    export EDITOR='nvim'
 fi
 
 export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
 
+export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
 
 autoload bashcompinit && bashcompinit
 
@@ -77,6 +78,7 @@ export PATH=$HOME/.local/bin:$PATH
 export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
 export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
 export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
+export PATH="$PATH:$(go env GOPATH)/bin"
 
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -102,4 +104,3 @@ if [[ -n "$ZSH_PROFILE" ]]; then
         echo "No profile found for type: $ZSH_PROFILE"
     fi
 fi
-
