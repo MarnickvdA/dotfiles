@@ -100,7 +100,8 @@ return {
             fat_cat,
         }
 
-        dashboard.section.header.val = header_art[math.random(#header_art)] 
+        -- dashboard.section.header.val = header_art[math.random(#header_art)] 
+        dashboard.section.header.val = campfire 
 
         dashboard.section.buttons.val = {
             dashboard.button("e", "  > New file", ":ene <BAR> startinsert <CR>"),
