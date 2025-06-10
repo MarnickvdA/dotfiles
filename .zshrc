@@ -1,106 +1,53 @@
+# homebrew setup 
 eval "$(/opt/homebrew/bin/brew shellenv)"
+export HOMEBREW_NO_ENV_HINTS=true
 
-export ZSH="$HOME/.oh-my-zsh"
-export ZSH_CUSTOM="$HOME/.config/zsh/custom"
+# starship config 
+export STARSHIP_CONFIG="$HOME/.config/zsh/starship.toml"
+command -v starship &>/dev/null && eval "$(starship init zsh)"
 
-source $ZSH/oh-my-zsh.sh
+# load zplug plugins
+source "$HOME/.config/zsh/plugins.zsh"
 
-export ZPLUG_HOME=$(brew --prefix)/opt/zplug
-source $ZPLUG_HOME/init.zsh
+setopt AUTO_CD              # cd by just typing dir name
+setopt NO_CASE_GLOB         # case-insensitive globbing
+setopt HIST_FIND_NO_DUPS    # avoid showing duplicates in history search
+setopt EXTENDED_GLOB        # extended globbing support
+setopt AUTO_PUSHD           # pushd replaces cd, adds to directory stack
+setopt PUSHD_IGNORE_DUPS    # don’t pushd duplicate directories
+setopt CORRECT              # spell correction
+setopt INTERACTIVE_COMMENTS # allow comments in interactive shell
 
-zplug "mafredri/zsh-async", from:github
-zplug "plugins/git", from:oh-my-zsh
-zplug "plugins/aliases", from:oh-my-zsh
-# zplug "plugins/qrcode", from:oh-my-zsh
-# zplug "plugins/spring", from:oh-my-zsh
-# zplug "plugins/themes", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-# zplug "plugins/argocd", from:oh-my-zsh
-# zplug "plugins/aws", from:oh-my-zsh
-zplug "plugins/battery", from:oh-my-zsh
-zplug "plugins/brew", from:oh-my-zsh
-zplug "plugins/colorize", from:oh-my-zsh
-zplug "plugins/colored-man-pages", from:oh-my-zsh
-# zplug "plugins/deno", from:oh-my-zsh
-zplug "plugins/docker", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
-zplug "plugins/gh", from:oh-my-zsh
-zplug "plugins/gitignore", from:oh-my-zsh
-zplug "plugins/golang", from:oh-my-zsh
-# zplug "plugins/gradle", from:oh-my-zsh
-# zplug "plugins/helm", from:oh-my-zsh
-zplug "plugins/history", from:oh-my-zsh
-zplug "plugins/hitchhiker", from:oh-my-zsh
-# zplug "plugins/httpie", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
-# zplug "plugins/macos", from:oh-my-zsh
-# zplug "plugins/mvn", from:oh-my-zsh
-zplug "plugins/npm", from:oh-my-zsh
-zplug "plugins/postgres", from:oh-my-zsh
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-zplug "zsh-users/zsh-autosuggestions", as:plugin, defer:2
+# Add custom completions directory to the function search path
+fpath=($HOME/completions $fpath)
 
-zplug load
+# Load Zsh's native completion system
+autoload -Uz compinit && compinit
 
-# Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo
-        zplug install
-    fi
-fi
+# Enable support for Bash-style completion scripts
+autoload bashcompinit && bashcompinit
 
-# User configuration
- 
-# Add deno completions to search path
-if [[ ":$FPATH:" != *":$HOME/completions:"* ]]; then export FPATH="$HOME/completions:$FPATH"; fi
+export ZSH_COMPDUMP="$HOME/.cache/zsh/.zcompdump-$HOST"
+mkdir -p "$(dirname $ZSH_COMPDUMP)"
 
-# Preferred editor for local and remote sessions
+# Use vim, always.
 if [[ -n $SSH_CONNECTION ]]; then
     export EDITOR='vim'
 else
     export EDITOR='nvim'
 fi
-
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"                   # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion" # This loads nvm bash_completion
-
-export ZSH_COMPDUMP=$ZSH/cache/.zcompdump-$HOST
-
-autoload bashcompinit && bashcompinit
-
 export VISUAL="$EDITOR"
-export HOMEBREW_NO_ENV_HINTS=true
 
-export PATH=$HOME/.local/bin:$PATH
-export PATH="/usr/local/bin:/usr/local/sbin:~/bin:$PATH"
-export PATH="/opt/homebrew/opt/postgresql@15/bin:$PATH"
-export PATH="/opt/homebrew/opt/openjdk@21/bin:$PATH"
-export PATH="$PATH:$(go env GOPATH)/bin"
-
-export PYENV_ROOT="$HOME/.pyenv"
-[[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init - zsh)"
-
-export PATH="/Library/Frameworks/Python.framework/Versions/3.12/bin:$PATH"
-
-. "$HOME/.deno/env"
-
-eval "$(direnv hook zsh)"
-eval "$(starship init zsh)"
+# Load development tools (pyenv, nvm, deno, etc.)
+source "$HOME/.config/zsh/tools.zsh"
 
 # Load aliases
-source "$HOME/.config/zsh/aliases.zsh"
+[[ -f "$HOME/.config/zsh/aliases.zsh" ]] && source "$HOME/.config/zsh/aliases.zsh"
 
-# Load a special profile if we have set ZSH_PROFILE in .zprofile
+# Load machine-specific configuration based on $PROFILE_DIR
 PROFILE_DIR="$HOME/.config/zsh/profiles"
 if [[ -n "$ZSH_PROFILE" ]]; then
     PROFILE_FILE="$PROFILE_DIR/${ZSH_PROFILE}.zsh"
-    if [[ -f "$PROFILE_FILE" ]]; then
-        source "$PROFILE_FILE"
-    else
-        echo "No profile found for type: $ZSH_PROFILE"
-    fi
+    [[ -f "$PROFILE_FILE" ]] && source "$PROFILE_FILE" || echo "No profile found for type: $ZSH_PROFILE"
 fi
+
