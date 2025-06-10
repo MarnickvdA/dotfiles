@@ -1,20 +1,3 @@
-local window_size = 0.7
-local floatView = {
-    float = {
-        enable = true, -- Enable floating mode
-        quit_on_focus_loss = true, -- Auto-close when focus is lost
-        open_win_config = {
-            relative = "editor",
-            border = "rounded",
-            width = math.floor(vim.o.columns * window_size),
-            height = math.floor(vim.o.lines * window_size),
-            row = math.floor(vim.o.lines * ((1 - window_size) / 2)), -- Center it vertically
-            col = math.floor(vim.o.columns * ((1 - window_size) / 2)), -- Center it horizontally
-        },
-    },
-    width = 30, -- Not relevant for floating mode but required
-}
-
 return {
     "nvim-tree/nvim-tree.lua",
     version = "*",

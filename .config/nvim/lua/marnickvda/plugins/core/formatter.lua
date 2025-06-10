@@ -5,6 +5,13 @@ return {
         local conform = require("conform")
 
         conform.setup({
+            formatters = {
+                odinfmt = {
+                    command = "odinfmt",
+                    args = { "-stdin" },
+                    stdin = true,
+                },
+            },
             formatters_by_ft = {
                 zsh = { "shfmt" },
                 bash = { "shfmt" },
@@ -23,6 +30,7 @@ return {
                 python = { "isort", "black" },
                 go = { "gofmt" },
                 sql = { "sqlfmt" },
+                odin = { "odinfmt" },
             },
             format_on_save = {
                 lsp_fallback = true,

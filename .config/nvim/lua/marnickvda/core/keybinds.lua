@@ -1,3 +1,4 @@
+-- Load language specific keybindings
 local keybinds_path = "marnickvda.keybinds"
 
 local scan = vim.loop.fs_scandir(vim.fn.stdpath("config") .. "/lua/" .. keybinds_path:gsub("%.", "/"))
