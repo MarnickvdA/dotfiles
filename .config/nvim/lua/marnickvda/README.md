@@ -38,7 +38,7 @@ lua/marnickvda/
 
 ---
 
-## 🧐 Plugin Organization
+## Plugin Organization
 
 Plugins are grouped by purpose and placed in their corresponding folder:
 
@@ -78,7 +78,7 @@ return {
 
 Shared config like `ensure_installed` for Mason and Treesitter is defined in:
 
-```lua
+```text
 marnickvda/core/config.lua
 ```
 
