@@ -1,8 +1,8 @@
-# homebrew setup 
+# homebrew setup
 eval "$(/opt/homebrew/bin/brew shellenv)"
 export HOMEBREW_NO_ENV_HINTS=true
 
-# starship config 
+# starship config
 export STARSHIP_CONFIG="$HOME/.config/zsh/starship.toml"
 command -v starship &>/dev/null && eval "$(starship init zsh)"
 
@@ -51,3 +51,19 @@ if [[ -n "$ZSH_PROFILE" ]]; then
     [[ -f "$PROFILE_FILE" ]] && source "$PROFILE_FILE" || echo "No profile found for type: $ZSH_PROFILE"
 fi
 
+# Update Brewfile whenever something changes in it.
+brew() {
+    local dump_commands=('install' 'uninstall')
+    local main_command="$1"
+
+    command brew "$@"
+
+    if [[ " ${dump_commands[*]} " == *" $main_command "* ]]; then
+        local suffix="${ZSH_PROFILE:+.${ZSH_PROFILE}}"
+        local brewfile="${HOME}/.config/homebrew/Brewfile${suffix}"
+        (
+            command brew bundle dump --file="$brewfile" --force >/dev/null 2>&1
+        ) &
+        disown
+    fi
+}
