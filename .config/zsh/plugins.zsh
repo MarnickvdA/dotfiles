@@ -2,7 +2,7 @@
 export ZPLUG_HOME="$(brew --prefix)/opt/zplug"
 source "$ZPLUG_HOME/init.zsh"
 
-# zplug plugins 
+# zplug plugins
 zplug "mafredri/zsh-async", from:github
 
 # oh-my-zsh plugins
@@ -50,4 +50,3 @@ if ! zplug check --verbose && [[ -t 0 ]]; then
         zplug install
     fi
 fi
-

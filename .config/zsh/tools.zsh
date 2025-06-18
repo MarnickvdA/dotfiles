@@ -33,4 +33,3 @@ if [[ -d "/opt/homebrew/opt/openjdk@21/bin" ]]; then
 fi
 
 command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
-
