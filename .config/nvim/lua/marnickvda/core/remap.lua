@@ -43,8 +43,12 @@ vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Ex mode" })
 vim.keymap.set("n", "<leader>mR", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
 -- 🔍 Quick Search & Replace
-vim.keymap.set("n", "<leader>s", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-    { desc = "Replace word under cursor" })
+vim.keymap.set(
+    "n",
+    "<leader>s",
+    [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
+    { desc = "Replace word under cursor" }
+)
 
 -- 🛠 Make Current File Executable
 vim.keymap.set("n", "<leader>mX", "<cmd>!chmod +x %<CR>", { silent = true, desc = "Make file executable" })

@@ -74,22 +74,6 @@ return {
 
 ---
 
-## Configuration Centralization
-
-Shared config like `ensure_installed` for Mason and Treesitter is defined in:
-
-```text
-marnickvda/core/config.lua
-```
-
-Access it in plugin specs like:
-
-```lua
-ensure_installed = require("marnickvda.core.config").ensure_installed.mason
-```
-
----
-
 ## Plugin Management
 
 - Run `:Lazy` to open the Lazy.nvim UI
