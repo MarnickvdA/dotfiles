@@ -38,6 +38,10 @@ else
 fi
 export VISUAL="$EDITOR"
 
+# also for the man pages :)
+export MANPAGER='nvim +Man!'
+export MANWIDTH=128
+
 # Load development tools (pyenv, nvm, deno, etc.)
 source "$HOME/.config/zsh/tools.zsh"
 

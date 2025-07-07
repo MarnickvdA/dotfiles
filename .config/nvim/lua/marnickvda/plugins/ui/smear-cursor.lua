@@ -1,4 +1,4 @@
 return {
-    "sphamba/smear-cursor.nvim",
-    config = true,
+    -- "sphamba/smear-cursor.nvim",
+    -- config = true,
 }

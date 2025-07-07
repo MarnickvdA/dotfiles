@@ -39,8 +39,17 @@ return {
                     lspconfig.gopls.setup({
                         capabilities = capabilities,
                         cmd = { "gopls" },
+                        on_attach = function(client, bufnr)
+                            -- Force diagnostics update on buffer open
+                            vim.defer_fn(function()
+                                vim.lsp.buf.document_diagnostics(bufnr) -- triggers diagnostics refresh
+                            end, 100) -- 100ms delay so gopls is initialized
+                        end,
                         filetypes = { "go", "gomod", "gowork", "gotmpl" },
                         root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+                        flags = {
+                            debounce_text_changes = 150,
+                        },
                         settings = {
                             gopls = {
                                 completeUnimported = true,
