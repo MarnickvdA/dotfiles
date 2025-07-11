@@ -14,12 +14,12 @@ return {
                 vim.keymap.set("n", "go", vim.lsp.buf.type_definition, opts)
                 vim.keymap.set("n", "gr", vim.lsp.buf.references, opts)
                 vim.keymap.set("n", "gs", vim.lsp.buf.signature_help, opts)
-                vim.keymap.set("n", "<F4>", vim.lsp.buf.rename, opts)
-                vim.keymap.set("n", "<leader>mA", function()
+                vim.keymap.set("n", "<leader>mn", vim.lsp.buf.rename, opts)
+                vim.keymap.set("n", "<leader>mR", function()
                     vim.lsp.buf.code_action({ apply = true })
                 end, { buffer = event.buf, desc = "Apply first code action" })
 
-                vim.keymap.set("n", "<leader>ma", function()
+                vim.keymap.set("n", "<leader>mr", function()
                     vim.lsp.buf.code_action({ context = { only = { "source" } } })
                 end, { buffer = event.buf, desc = "Code actions" })
             end,

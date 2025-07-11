@@ -40,7 +40,7 @@ vim.keymap.set("i", "<C-c>", "<Esc>", { desc = "Use <C-c> as <Esc>" })
 vim.keymap.set("n", "Q", "<nop>", { desc = "Disable Ex mode" })
 
 -- 🎯 LSP Actions
-vim.keymap.set("n", "<leader>mR", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
+vim.keymap.set("n", "<leader>lsp", "<cmd>LspRestart<cr>", { desc = "Restart LSP" })
 
 -- 🔍 Quick Search & Replace
 vim.keymap.set(
