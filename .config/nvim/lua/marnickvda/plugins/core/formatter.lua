@@ -6,11 +6,6 @@ return {
 
         conform.setup({
             formatters = {
-                odinfmt = {
-                    command = "odinfmt",
-                    args = { "-stdin" },
-                    stdin = true,
-                },
                 flake8 = {
                     command = "flake8",
                     args = { "--format=%(row)d,%(col)d,%(code).1s,%(code)s: %(text)s", "-" },
@@ -52,13 +47,12 @@ return {
                 python = { "isort", "black" },
                 go = { "gofmt" },
                 sql = { "sqlfmt" },
-                odin = { "odinfmt" },
             },
-            format_on_save = {
-                lsp_fallback = true,
-                async = false,
-                timeout_ms = 1000,
-            },
+            -- format_on_save = {
+            --     lsp_fallback = true,
+            --     async = false,
+            --     timeout_ms = 1000,
+            -- },
         })
 
         vim.filetype.add({ extension = { avsc = "json" } })

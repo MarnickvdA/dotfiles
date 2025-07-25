@@ -39,12 +39,6 @@ return {
                     lspconfig.gopls.setup({
                         capabilities = capabilities,
                         cmd = { "gopls" },
-                        on_attach = function(client, bufnr)
-                            -- Force diagnostics update on buffer open
-                            vim.defer_fn(function()
-                                vim.lsp.buf.document_diagnostics(bufnr) -- triggers diagnostics refresh
-                            end, 100) -- 100ms delay so gopls is initialized
-                        end,
                         filetypes = { "go", "gomod", "gowork", "gotmpl" },
                         root_dir = util.root_pattern("go.work", "go.mod", ".git"),
                         flags = {
@@ -52,8 +46,6 @@ return {
                         },
                         settings = {
                             gopls = {
-                                completeUnimported = true,
-                                usePlaceholders = true,
                                 analyses = {
                                     unusedparams = true,
                                     unusedwrite = true,
@@ -65,7 +57,32 @@ return {
                                     ST1000 = true,
                                     ST1003 = true,
                                 },
+
+                                hints = {
+                                    assignVariableTypes = true,
+                                    compositeLiteralFields = true,
+                                    compositeLiteralTypes = true,
+                                    constantValues = true,
+                                    functionTypeParameters = true,
+                                    parameterNames = true,
+                                    rangeVariableTypes = true,
+                                },
+
+                                completeUnimported = true,
+                                usePlaceholders = true,
+                                gofumpt = true,
                                 staticcheck = true,
+
+                                ["ui.completion.importShortcut"] = true,
+                                ["ui.completion.matcher"] = "fuzzy",
+                                ["ui.completion.usePlaceholders"] = true,
+
+                                -- Enable more import completions
+                                ["completion.importPackage"] = true,
+
+                                -- Auto import suggestions
+                                ["imports.granularity"] = "package",
+
                             },
                         },
                     })
@@ -98,6 +115,13 @@ return {
                     })
                 end,
             },
+        })
+
+        local lsp_keymaps = require("marnickvda.core.lsp-keymaps")
+
+        vim.api.nvim_create_autocmd("LspAttach", {
+            desc = "LSP Keymaps",
+            callback = lsp_keymaps.setup_keymaps,
         })
     end,
 }
