@@ -71,3 +71,10 @@ brew() {
         disown
     fi
 }
+
+# bun completions
+[ -s "/Users/marnick.van.der.arend/.bun/_bun" ] && source "/Users/marnick.van.der.arend/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
