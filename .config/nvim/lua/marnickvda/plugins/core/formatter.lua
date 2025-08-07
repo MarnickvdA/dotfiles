@@ -64,5 +64,12 @@ return {
                 timeout_ms = 1000,
             })
         end, { desc = "Format file or range (in visual mode)" })
+
+        vim.api.nvim_create_autocmd("FileType", {
+            pattern = "markdown",
+            callback = function()
+                vim.opt_local.colorcolumn = "120"
+            end,
+        })
     end,
 }

@@ -1,7 +1,6 @@
 # Neovim Config
 
-This Neovim configuration is built around
-**[Lazy.nvim](https://github.com/folke/lazy.nvim)** for modular, lazy-loaded
+This Neovim configuration is built around **[Lazy.nvim](https://github.com/folke/lazy.nvim)** for modular, lazy-loaded
 plugin management. It emphasizes readability, scalability, and maintainability.
 
 ---
